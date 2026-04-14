@@ -73,6 +73,7 @@ create table sys_user (
                           primary key (user_id)
 ) engine=innodb auto_increment=100 comment = '用户信息表';
 
+
 -- ----------------------------
 -- 初始化用户数据（字段严格匹配，无报错）
 -- ----------------------------
