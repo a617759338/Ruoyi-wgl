@@ -1,0 +1,32 @@
+# 网关模块 8080
+gateway:
+  image: openjdk:17-jdk-slim
+  container_name: rnw-gateway
+  restart: always
+  volumes:
+    - ./ruoyi-gateway/target/ruoyi-gateway.jar:/app.jar
+  command: java -jar /app.jar --spring.profiles.active=prod
+  networks:
+    - rnw-network
+
+# 认证模块 9200
+auth:
+  image: openjdk:17-jdk-slim
+  container_name: rnw-auth
+  restart: always
+  volumes:
+    - ./ruoyi-auth/target/ruoyi-auth.jar:/app.jar
+  command: java -jar /app.jar --spring.profiles.active=prod
+  networks:
+    - rnw-network
+
+# 系统模块 9201
+system:
+  image: openjdk:17-jdk-slim
+  container_name: rnw-system
+  restart: always
+  volumes:
+    - ./ruoyi-modules/ruoyi-system/target/ruoyi-system.jar:/app.jar
+  command: java -jar /app.jar --spring.profiles.active=prod
+  networks:
+    - rnw-network
