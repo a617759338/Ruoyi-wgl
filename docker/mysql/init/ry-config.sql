@@ -13,6 +13,9 @@
 
  Date: 20/04/2026 14:11:18
 */
+/* 创建数据库 */
+CREATE DATABASE IF NOT EXISTS `ry-config` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_bin;
+USE `ry-config`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
