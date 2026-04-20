@@ -24,13 +24,14 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql/data:/var/lib/mysql
-      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/init:/docker-entrypoint-initdb.d  # 自动执行所有sql
     command:
       - mysqld
       - --default-authentication-plugin=mysql_native_password
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
       - --lower-case-table-names=1
+      - --init-file=/docker-entrypoint-initdb.d/  # 强制执行目录下sql
     environment:
       MYSQL_ROOT_PASSWORD: rn@123456
       MYSQL_DATABASE: ry-cloud
