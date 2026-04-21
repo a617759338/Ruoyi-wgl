@@ -13,7 +13,8 @@
 
  Date: 20/04/2026 14:11:38
 */
-
+CREATE DATABASE IF NOT EXISTS ry-config;
+USE ry-config;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

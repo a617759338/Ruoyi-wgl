@@ -13,7 +13,9 @@
 
  Date: 20/04/2026 14:11:18
 */
-
+-- 自动创建 ry-config 数据库并使用
+CREATE DATABASE IF NOT EXISTS ry-config;
+USE ry-config;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
