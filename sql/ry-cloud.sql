@@ -13,8 +13,13 @@
 
  Date: 20/04/2026 14:11:38
 */
-CREATE DATABASE IF NOT EXISTS ry-cloud;
-USE ry-cloud;
+-- 创建数据库（注意：中划线必须用反引号包起来）
+CREATE DATABASE IF NOT EXISTS `ry-cloud` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- 使用这个数据库
+USE `ry-cloud`;
+
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 

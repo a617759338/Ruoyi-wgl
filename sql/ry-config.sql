@@ -14,8 +14,12 @@
  Date: 20/04/2026 14:11:18
 */
 -- 自动创建 ry-config 数据库并使用
-CREATE DATABASE IF NOT EXISTS ry-config;
-USE ry-config;
+-- 创建数据库（注意：中划线必须用反引号包起来）
+CREATE DATABASE IF NOT EXISTS `ry-config` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- 使用这个数据库
+USE `ry-config`;
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
