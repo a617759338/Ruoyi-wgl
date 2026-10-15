@@ -10,12 +10,12 @@ public class CacheConstants
     /**
      * 缓存有效期，默认720（分钟）
      */
-    public final static long EXPIRATION = 2;
+    public final static long EXPIRATION = 30;
 
     /**
      * 缓存刷新时间，默认120（分钟）
      */
-    public final static long REFRESH_TIME = 1;
+    public final static long REFRESH_TIME = 10;
 
     /**
      * 密码最大错误次数

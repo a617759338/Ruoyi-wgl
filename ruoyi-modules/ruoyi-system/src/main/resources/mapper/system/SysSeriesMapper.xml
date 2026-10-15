@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysSeriesMapper">
+
+    <resultMap type="com.ruoyi.system.domain.SysSeries" id="SysSeriesResult">
+        <id property="seriesId" column="series_id"/>
+        <result property="seriesCode" column="series_code"/>
+        <result property="seriesName" column="series_name"/>
+        <result property="sortNum" column="sort_num"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectSysSeriesVo">
+        select series_id, series_code, series_name, sort_num, status, remark,
+               create_by, create_time, update_by, update_time
+        from sys_series
+    </sql>
+
+    <select id="selectSysSeriesList" parameterType="com.ruoyi.system.domain.SysSeries" resultMap="SysSeriesResult">
+        <include refid="selectSysSeriesVo"/>
+        <where>
+            <if test="seriesCode != null and seriesCode != ''">
+                AND series_code like concat('%', #{seriesCode}, '%')
+            </if>
+            <if test="seriesName != null and seriesName != ''">
+                AND series_name like concat('%', #{seriesName}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+        </where>
+        order by sort_num asc
+    </select>
+
+    <select id="selectSysSeriesById" parameterType="Long" resultMap="SysSeriesResult">
+        <include refid="selectSysSeriesVo"/>
+        where series_id = #{seriesId}
+    </select>
+
+    <select id="selectSysSeriesByCode" parameterType="String" resultMap="SysSeriesResult">
+        <include refid="selectSysSeriesVo"/>
+        where series_code = #{seriesCode}
+    </select>
+
+    <insert id="insertSysSeries" parameterType="com.ruoyi.system.domain.SysSeries" useGeneratedKeys="true" keyProperty="seriesId">
+        insert into sys_series
+        (series_code, series_name, sort_num, status, remark, create_by, create_time)
+        values
+            (#{seriesCode},#{seriesName},#{sortNum},#{status},#{remark},#{createBy},#{createTime})
+    </insert>
+
+    <update id="updateSysSeries" parameterType="com.ruoyi.system.domain.SysSeries">
+        update sys_series
+        <set>
+            <if test="seriesCode != null and seriesCode != ''">series_code = #{seriesCode},</if>
+            <if test="seriesName != null and seriesName != ''">series_name = #{seriesName},</if>
+            <if test="sortNum != null">sort_num = #{sortNum},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            update_by = #{updateBy},
+            update_time = #{updateTime}
+        </set>
+        where series_id = #{seriesId}
+    </update>
+
+    <delete id="deleteSysSeriesByIds">
+        delete from sys_series where series_id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

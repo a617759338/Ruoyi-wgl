@@ -119,27 +119,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			sysdate()
  		)
 	</insert>
-	
+
 	<update id="updateDept" parameterType="SysDept">
- 		update sys_dept
- 		<set>
- 			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
- 			<if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
- 			<if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
- 			<if test="orderNum != null">order_num = #{orderNum},</if>
- 			<if test="leader != null">leader = #{leader},</if>
- 			<if test="director != null">director = #{director},</if>
- 			<if test="assistant != null">assistant = #{assistant},</if>
- 			<if test="manager != null">manager = #{manager},</if>
- 			<if test="phone != null">phone = #{phone},</if>
- 			<if test="email != null">email = #{email},</if>
- 			<if test="status != null and status != ''">status = #{status},</if>
- 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
- 			update_time = sysdate()
- 		</set>
- 		where dept_id = #{deptId}
+		update sys_dept
+		<set>
+			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
+			<if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
+			<if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
+			<if test="orderNum != null">order_num = #{orderNum},</if>
+
+			<!-- ✅移除if判断，无论null/字符串都执行赋值，支持清空 -->
+			leader = #{leader},
+			director = #{director},
+			assistant = #{assistant},
+			manager = #{manager},
+
+			<if test="phone != null">phone = #{phone},</if>
+			<if test="email != null">email = #{email},</if>
+			<if test="status != null and status != ''">status = #{status},</if>
+			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+			update_time = sysdate()
+		</set>
+		where dept_id = #{deptId}
 	</update>
-	
+
+
 	<update id="updateDeptChildren" parameterType="java.util.List">
 	    update sys_dept set ancestors =
 	    <foreach collection="depts" item="item" index="index"
